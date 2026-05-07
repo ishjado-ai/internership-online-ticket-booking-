@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Smart Ticket</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #222;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            color: #555;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .event-card {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: scale(1.03);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background-color: #333;
+        }
+
+        .event-content {
+            padding: 15px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            min-height: 45px;
+        }
+
+        .event-date {
+            color: #bbb;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-book {
+            background: #00b14f;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-book:hover {
+            background: #009940;
+        }
+
+        .brand-card {
+            background: #0066b2;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 380px;
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* LEFT SIDE */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* LOGO */
+.logo {
+    width: 50px;
+    height: 50px;
+    background: #2f80ed;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* TITLE */
+.title h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+.title p {
+    font-size: 12px;
+    color: #777;
+}
+
+/* RIGHT SIDE */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* USER */
+.user-icon {
+    text-align: center;
+    font-size: 12px;
+    color: #444;
+}
+
+.user-icon span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+    </style>
+</head>
+
+<body>
+<header class="header">
+    <div class="header-left">
+        <div class="logo">ST</div>
+        <div class="title">
+            <h1>Smart Ticket</h1>
+            <p>Online booking system</p>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="user-icon">
+            <span>👤</span>
+            <p>USER</p>
+        </div>
+    </div>
+</header>
+<div class="container">
+
+    <header>
+        <a href="home.html" class="back-link">← Back</a>
+        <h2>Upcoming Events</h2>
+        <div></div>
+    </header>
+
+    <div class="event-grid">
+
+        <!-- Event 1 -->
+        <div class="event-card">
+            <img src="stage pic/event 6.jpg" class="event-image" alt="CAVB Men's Club Champs">
+            <div class="event-content">
+                <h3 class="event-title">AMAVUBI VS NIGERIA</h3>
+                <p class="event-date">27 Apr 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">14:00</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'CAVB Men', 's Club Champs',
+                            '27 Apr 2026',
+                            '14:00',
+                            'stadium amahoro',
+                            'Enjoy elite Football championship action featuring Africa’s top clubs competing live.',
+                            'stage pic/event 6.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-card">
+            <img src="stage pic/bar game.jpeg" class="event-image" alt="BAL Quarter Finals">
+            <div class="event-content">
+                <h3 class="event-title">BAL Finals</h3>
+                <p class="event-date">22 May 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">4:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'BAL Quarter Finals',
+                            '22 May 2026',
+                            '4:00 PM',
+                            'BK Arena',
+                            'Watch thrilling Basketball Africa League quarterfinal battles live in Kigali.',
+                            'stage pic/bar game.jpeg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="event-card">
+            <img src="stage pic/music festival.jpg" class="event-image" alt="Music Festival Kigali">
+            <div class="event-content">
+                <h3 class="event-title">Music Festival Kigali</h3>
+                <p class="event-date">30 May 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">6:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'Music Festival Kigali',
+                            '30 May 2026',
+                            '6:00 PM',
+                            'BK Arena ',
+                            'Experience Rwanda’s biggest music event with live artists, DJs, and performances.',
+                            'stage pic/music festival.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="event-card">
+            <img src="stage pic/comedy.webp" class="event-image" alt="Comedy Night">
+            <div class="event-content">
+                <h3 class="event-title">Comedy Night</h3>
+                <p class="event-date">27 Mar 2025</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">7:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'Comedy Night',
+                            '27 Mar 2025',
+                            '7:00 PM',
+                            'Camp Kigali',
+                            'Laugh out loud with top comedians delivering unforgettable performances.',
+                            'stage pic/comedy.webp'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 5 -->
+        <div class="event-card">
+            <img src="stage pic/mm.webp" class="event-image" alt="Football Match">
+            <div class="event-content">
+                <h3 class="event-title">Amapiano Dance Night</h3>
+                <p class="event-date">10 Jun 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">3:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'Amapiano Dance Night',
+                            '10 Jun 2026',
+                            '3:00 PM',
+                            'Gisimeti hall',
+                            'Experience the vibrant energy of Amapiano music with local artists.',
+                            'stage pic/mm.webp'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 6 -->
+        <div class="event-card">
+            <img src="stage pic/event 10.jpg" class="event-image" alt="Business Conference">
+            <div class="event-content">
+                <h3 class="event-title">DJ ZINZI ON THE MIX </h3>
+                <p class="event-date">15 Jun 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">9:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'KABEZA CINEMA HALL',
+                            '15 Jun 2026',
+                            '9:00 PM',
+                            'KABEZA ,KANOMBE CINEMA HALL',
+                            'Meet entrepreneurs, investors, and industry leaders shaping Africa’s future.',
+                            'stage pic/event 10.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 7 -->
+        <div class="event-card">
+            <img src="stage pic/event 1.jpg" class="event-image" alt="Art Exhibition">
+            <div class="event-content">
+                <h3 class="event-title">MASAMBA NIGTHT</h3>
+                <p class="event-date">20 Jun 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">18:00 </span>
+                    </div>
+                      <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'TRADITION SONGGS ',
+                            '20 Jun 2026',
+                            '18:00',
+                            'BK ARENA',
+                            'Experience the soulful sounds of traditional music with Masamba and friends.',
+                            'stage pic/event 1.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 8 -->
+        <div class="event-card">
+            <img src="stage pic/fashion.jpg" class="event-image" alt="Fashion Show">
+            <div class="event-content">
+                <h3 class="event-title">Fashion Show</h3>
+                <p class="event-date">25 Jun 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">5:00 PM</span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'Fashion Show',
+                            '25 Jun 2026',
+                            '5:00 PM',
+                            'Kigali Heights',
+                            'See stunning runway collections from top designers and models.',
+                            'stage pic/fashion.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event 9 -->
+        <div class="event-card">
+            <img src="stage pic/event 3.jpg" class="event-image" alt="Tech Meetup">
+            <div class="event-content">
+                <h3 class="event-title">ALL STAR NIGTH</h3>
+                <p class="event-date">28 Jun 2026</p>
+                <div class="card-footer">
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value">22:00 </span>
+                    </div>
+                    <div>
+                        <span class="info-label">Status</span>
+                        <span class="info-value">Active</span>
+                    </div>
+                    <button class="btn-book"
+                        onclick="selectEvent(
+                            'ALL STAR NIGTH',
+                            '28 Jun 2026',
+                            '22:00',
+                            'BK ARENA',
+                            'Experience an unforgettable night with top artists, DJs, and performers in one epic event.',
+                            'stage pic/event 3.jpg'
+                        )">
+                        Book
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brand Card -->
+        <div class="brand-card">
+            <h2>::: SMART TICKET :::</h2>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function selectEvent(title, date, time, location, description, image) {
+    const eventData = {
+        title: title,
+        date: date,
+        time: time,
+        location: location,
+        description: description,
+        image: image
+    };
+
+    localStorage.setItem('selectedEvent', JSON.stringify(eventData));
+
+    window.location.href = "event-details.html";
+}
+</script>
+
+</body>
+</html>

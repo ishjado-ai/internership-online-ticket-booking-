@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - Smart Ticket</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f7f6;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 22px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content { padding: 30px; }
+
+.summary {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* PAYMENT METHODS */
+.payment-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.payment-methods .method {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background: #fff;
+}
+
+.payment-methods .method img {
+  max-width: 70px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.payment-methods .method.active {
+  border-color: #28a745;
+  background: #eafaf0;
+}
+
+#paymentForm {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+/* HEADER */
+.header1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* LEFT SIDE */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* LOGO */
+.logo {
+    width: 50px;
+    height: 50px;
+    background: #2f80ed;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* TITLE */
+.title h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+.title p {
+    font-size: 12px;
+    color: #777;
+}
+
+/* RIGHT SIDE */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* USER */
+.user-icon {
+    text-align: center;
+    font-size: 12px;
+    color: #444;
+}
+
+.user-icon span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+</style>
+</head>
+
+<body>
+<header class="header1">
+    <div class="header-left">
+        <div class="logo">ST</div>
+        <div class="title">
+            <h1>Smart Ticket</h1>
+            <p>Online booking system</p>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="user-icon">
+              <span id="username">👤</span>
+            <p>USER</p>
+        </div>
+    </div>
+</header>
+<div class="container">
+
+<div class="header">
+  <a class="back-btn" href="home.html">← Back</a>
+  Payment
+</div>
+
+<div class="content">
+
+<!-- SUMMARY -->
+<div class="summary" id="summary"></div>
+
+<!-- PAYMENT METHODS -->
+<div class="payment-methods">
+
+  <div class="method active" onclick="setMethod('MTN',this)">
+    <img src="stage pic/mtn loggo.png" alt="MTN">
+  </div>
+
+  <div class="method" onclick="setMethod('Airtel',this)">
+    <img src="stage pic/airtel logo.png" alt="Airtel">
+  </div>
+
+  <div class="method" onclick="setMethod('Visa',this)">
+    <img src="stage pic/visa logo.png" alt="Visa">
+  </div>
+
+</div>
+
+<!-- FORM -->
+<div id="paymentForm"></div>
+
+<button onclick="pay()">Pay & Generate Ticket</button>
+
+</div>
+</div>
+
+<script>
+let method = "MTN";
+let booking = JSON.parse(localStorage.getItem("booking"));
+
+if (!booking) {
+    alert("No booking found");
+    window.location.href = "event.html";
+}
+
+/* =========================
+   SUMMARY BUILDER
+========================= */
+function buildSummary() {
+    let html = "";
+    if (booking.type === "event") {
+        html = `
+      <h3>Event Booking</h3>
+      <p><b>Event:</b> ${booking.event.title}</p>
+      <p><b>Ticket:</b> ${booking.ticket.type}</p>
+      <p><b>Date:</b> ${booking.event.date}</p>
+      <p><b>Price:</b> ${booking.ticket.price}</p>
+    `;
+    } else if (booking.type === "transport") {
+        html = `
+      <h3>Transport Booking</h3>
+      <p><b>Route:</b> ${booking.event.route}</p>
+      <p><b>Time:</b> ${booking.event.time}</p>
+      <p><b>Price:</b> ${booking.event.price}</p>
+    `;
+    }
+    document.getElementById("summary").innerHTML = html;
+}
+
+buildSummary();
+
+/* =========================
+   PAYMENT METHOD UI
+========================= */
+function setMethod(m, el) {
+    method = m;
+
+    document.querySelectorAll(".method").forEach(x => x.classList.remove("active"));
+    el.classList.add("active");
+
+    const form = document.getElementById("paymentForm");
+
+    // IMPORTANT: Added id="name" to the name inputs below
+    if (m === "MTN") {
+        form.innerHTML = `
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <label>MTN Number</label>
+      <input id="phone" type="number" placeholder="078..." required>
+    `;
+    } else if (m === "Airtel") {
+        form.innerHTML = `
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <label>Airtel Number</label>
+      <input id="phone" type="number" placeholder="072..." required>
+    `;
+    } else if (m === "Visa") {
+        form.innerHTML = `
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <label>Card Number</label>
+      <input id="phone" type="number" placeholder="1234 5678 9012 3456" required>
+      <label>CVV</label>
+      <input type="password" id="cvv" placeholder="***" required>
+    `;
+    }
+}
+
+// Initialize the first view
+setMethod("MTN", document.querySelector(".method"));
+
+/* =========================
+   PAYMENT PROCESS
+========================= */
+function pay() {
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+
+    // Basic Validation
+    if (!nameInput.value || !phoneInput.value) {
+        alert("Please fill in all fields before proceeding.");
+        return;
+    }
+
+    // Update the booking object
+    booking.user = {
+        name: nameInput.value,
+        phone: phoneInput.value
+    };
+
+    booking.payment = {
+        method: method,
+        status: "paid",
+        timestamp: new Date().toLocaleString()
+    };
+
+    booking.meta = {
+        bookingId: "ST" + Date.now(),
+        seat: "SEAT-" + Math.floor(Math.random() * 50 + 1)
+    };
+
+    // Save back to localStorage
+    localStorage.setItem("booking", JSON.stringify(booking));
+
+    // Move to ticket page
+    window.location.href = "ticket.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Smart Ticket</title>
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --bg-light: #f4f7f6;
+            --text-dark: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-circle {
+            background: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { color: #666; font-size: 1.1rem; }
+
+        /* Booking Cards Container */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            width: 400px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden; /* Keeps images inside the card */
+        }
+
+        /* The Slider Logic */
+        .slider-viewport {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .slider-track {
+            display: flex;
+            width: 300%; /* 3 images = 300% width */
+            height: 100%;
+            animation: slideLoop 12s infinite ease-in-out;
+        }
+
+        .slider-track img {
+            width: 100.33%; /* Each image takes 1/3 of the track */
+            object-fit: cover;
+        }
+
+        /* Animation: Moves the track left in 3 steps */
+        @keyframes slideLoop {
+            0%, 20% { transform: translateX(0); }            /* Show Image 1 */
+            33%, 53% { transform: translateX(-33.33%); }    /* Show Image 2 */
+            66%, 86% { transform: translateX(-66.66%); }    /* Show Image 3 */
+            100% { transform: translateX(0); }               /* Back \ Image 1 */
+        }
+
+        .card h2 { margin: 15px 0; }
+        .card p { color: #555; line-height: 1.6; min-height: 80px; }
+
+        .book-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .book-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-circle">ST</div>
+            <div>
+                <div style="font-weight: bold;">Smart Ticket</div>
+                <div style="font-size: 0.8rem; color: #777;">Online Booking System</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <span id="username">👤</span>
+         <a href="welcome.html" onclick="logout()" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <main class="hero">
+        <h1>Welcome to Smart Ticket</h1>
+        <p>Book transport tickets or event tickets in one platform</p>
+    </main>
+
+    <section class="cards-container">
+        <div class="card">
+            <div class="slider-viewport">
+                <div class="slider-track">
+                    <img src="stage pic/bus 5.jpg" alt="Bus 1">
+                    <img src="stage pic/bus 4.jpg" alt="Bus 2">
+                    <img src="stage pic/bus 8.jpg" alt="Bus 3">
+                </div>
+            </div>
+            <h2>Transport Booking</h2>
+            <p>Book bus tickets to Huye, Musanze, Rubavu, Ngarama and more destinations across Rwanda.</p>
+            <a href="transport.html" class="book-link">Book Now →</a>
+        </div>
+
+        <div class="card">
+            <div class="slider-viewport">
+                <div class="slider-track" style="animation-delay: -2s;"> <img src="stage pic/event 6.jpg" alt="Concert">
+                    <img src="stage pic/event 9.jpg" alt="Sports">
+                    <img src="stage pic/event 8.jpg" alt="Event Venue">
+                </div>
+            </div>
+            <h2>Event Booking</h2>
+            <p>Book tickets for concerts, sports events at BK Arena, Amahoro Stadium and other venues.</p>
+            <a href="event.html" class="book-link" style="color: #28a745;">Book Now →</a>
+        </div>
+    </section>
+<script>
+const user = JSON.parse(localStorage.getItem('user'));
+
+if (!user) {
+    window.location.href = "welcome.html";
+} else {
+    document.getElementById('username').textContent = "👤 " + user.name;
+}
+
+// LOGOUT
+function logout() {
+    localStorage.removeItem('user');
+    window.location.href = "welcome.html";
+}
+</script>
+</body>
+</html>

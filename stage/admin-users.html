@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Users</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    padding:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#2563eb;
+    color:#fff;
+}
+
+a{
+    display:inline-block;
+    margin-bottom:15px;
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.delete-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.delete-btn:hover{
+    background:darkred;
+}
+
+.empty{
+    text-align:center;
+    padding:20px;
+    color:gray;
+}
+</style>
+</head>
+
+<body>
+
+<a href="admin.html">⬅ Back</a>
+
+<h2>Registered Users</h2>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="usersTable">
+</tbody>
+
+</table>
+
+<script>
+const usersTable = document.getElementById('usersTable');
+
+function loadUsers() {
+    // Matches the 'users' key we used in index.html
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    usersTable.innerHTML = '';
+
+    if(users.length === 0){
+        usersTable.innerHTML = `<tr><td colspan="4" class="empty">No registered users found.</td></tr>`;
+        return;
+    }
+
+    users.forEach((user, index) => {
+        usersTable.innerHTML += `
+        <tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>
+                <button class="delete-btn" onclick="deleteUser(${index})">Delete</button>
+            </td>
+        </tr>`;
+    });
+}
+
+function deleteUser(index){
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    if(confirm("Delete this user?")){
+        users.splice(index, 1);
+        // Re-index IDs so they stay clean (1, 2, 3...)
+        users = users.map((user, i) => ({ ...user, id: i + 1 }));
+        localStorage.setItem('users', JSON.stringify(users));
+        loadUsers();
+    }
+}
+
+loadUsers();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Ticket - Booking System</title>
+    <style>
+        /* Modern Layout Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Top Navigation Bar */
+        .top-bar {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: #000;
+        }
+
+        .admin-box {
+            border: solid black 2px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background: rgb(55, 74, 245);
+            color: red;
+            font-weight: bold;
+        }
+
+        .admin-box a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        /* Form Container */
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Toggle Buttons */
+        .toggle-container {
+            display: flex;
+            background: #f1f1f1;
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .toggle-container button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .toggle-container button.active {
+            background: white;
+            color: #007bff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Form Elements */
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .main-btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="welcome.html" class="back-link">← Back to dashboard</a>
+        <div class="admin-box"><a href="admin login.html">Admin</a></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Smart Ticket</h1>
+            <p>Online Ticket Booking System</p>
+        </header>
+
+        <div class="form-box">
+            <div class="toggle-container">
+                <button id="loginBtn" onclick="showLogin()">Login</button>
+                <button id="registerBtn" class="active" onclick="showRegister()">Register</button>
+            </div>
+
+            <form id="registerForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required maxlength="15" pattern="^[A-Za-z]{1,15}$">
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required maxlength="8">
+                </div>
+                <button type="submit" class="main-btn">Create Account</button>
+            </form>
+
+            <form id="loginForm" style="display: none;">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="main-btn">Login</button>
+            </form>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Smart Ticket. All rights reserved.</p>
+        </footer>
+    </div>
+
+   <script>
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+
+    function showLogin() {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        loginBtn.classList.add('active');
+        registerBtn.classList.remove('active');
+    }
+
+    function showRegister() {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        registerBtn.classList.add('active');
+        loginBtn.classList.remove('active');
+    }
+
+    // 🔒 VALIDATION REGEX (ADDED)
+    const nameRegex = /^[A-Za-z]{1,15}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{1,8}$/;
+
+    // REGISTER (SAVE USER)
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = registerForm.querySelector('input[type="text"]').value.trim();
+        const email = registerForm.querySelector('input[type="email"]').value.trim();
+        const password = registerForm.querySelector('input[type="password"]').value.trim();
+
+        // 🔥 VALIDATION CHECKS (ADDED)
+        if (!nameRegex.test(name)) {
+            alert("Name must contain only letters and not exceed 15 characters.");
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert("Password must be max 8 characters and include letters and numbers.");
+            return;
+        }
+
+        const user = { name, email, password };
+        localStorage.setItem('user', JSON.stringify(user));
+
+        alert("Account created successfully!");
+        window.location.href = 'home.html';
+    });
+
+    // LOGIN (CHECK USER)
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = loginForm.querySelector('input[type="email"]').value.trim();
+        const password = loginForm.querySelector('input[type="password"]').value.trim();
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+
+        // 🔥 EXTRA VALIDATION ON LOGIN (ADDED)
+        if (!emailRegex.test(email)) {
+            alert("Enter a valid email.");
+            return;
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert("Invalid password format.");
+            return;
+        }
+
+        if (storedUser && email === storedUser.email && password === storedUser.password) {
+            alert("Login successful!");
+            window.location.href = 'home.html';
+        } else {
+            alert("Invalid email or password!");
+        }
+    });
+
+    // if (localStorage.getItem('user')) { window.location.href = "home.html"; }
+</script>
+</body>
+</html>

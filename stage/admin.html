@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Admin Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#111,#1e1e1e,#0f172a);
+    padding:20px;
+}
+
+/* container */
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:rgba(255,255,255,0.96);
+    min-height:100vh;
+    padding:25px;
+    border-radius:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+/* top */
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-circle{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:22px;
+    box-shadow:0 8px 20px rgba(37,99,235,.4);
+}
+
+.logo-text h2{
+    font-size:30px;
+}
+
+.logo-text p{
+    font-size:14px;
+    color:#666;
+}
+
+.profile{
+    font-size:50px;
+    animation:float 3s ease-in-out infinite;
+}
+
+.logout{
+    padding:12px 22px;
+    border:none;
+    background:#ffe0e0;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.logout a{
+    text-decoration:none;
+    color:#d10000;
+    font-weight:bold;
+}
+
+.logout:hover{
+    transform:translateY(-3px);
+    background:#d10000;
+}
+
+.logout:hover a{
+    color:#fff;
+}
+
+/* title */
+.title{
+    text-align:center;
+    font-size:56px;
+    margin:35px 0;
+    font-family:Georgia, serif;
+    color:#111;
+    animation:fadeDown 1s ease;
+}
+
+/* grid */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:35px;
+}
+
+/* card wrapper */
+.box{
+    text-align:center;
+    animation:fadeUp .8s ease forwards;
+}
+
+/* realistic animated cards */
+.card{
+    width:100%;
+    height:230px;
+    border-radius:22px;
+    background:#fff;
+    overflow:hidden;
+    position:relative;
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.7);
+    transition:all .45s ease;
+    transform-style:preserve-3d;
+    cursor:pointer;
+}
+
+/* shine effect */
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.6),
+        transparent
+    );
+    transition:.8s;
+    z-index:2;
+}
+
+/* glow border */
+.card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.4);
+    pointer-events:none;
+}
+
+.card:hover{
+    transform:translateY(-12px) rotateX(6deg) rotateY(-6deg) scale(1.03);
+    box-shadow:
+    0 25px 45px rgba(0,0,0,.22),
+    0 0 25px rgba(37,99,235,.18);
+}
+
+.card:hover::before{
+    left:130%;
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .5s ease;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+
+/* link */
+.link{
+    margin-top:16px;
+    color:#2563eb;
+    font-weight:bold;
+    font-size:20px;
+    text-decoration:none;
+    display:inline-block;
+    transition:.3s;
+}
+
+.link:hover{
+    color:#000;
+    transform:translateX(6px);
+}
+
+/* animations */
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* responsive */
+@media(max-width:768px){
+
+    .title{
+        font-size:38px;
+    }
+
+    .profile{
+        display:none;
+    }
+
+    .link{
+        font-size:17px;
+    }
+
+    .card{
+        height:210px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- top -->
+    <div class="top-bar">
+
+        <div class="logo">
+            <div class="logo-circle">ST</div>
+
+            <div class="logo-text">
+                <h2>Smart Ticket</h2>
+                <p>Online booking system</p>
+            </div>
+        </div>
+
+        <div class="profile">👤</div>
+
+        <button class="logout">
+            <a href="index.html">LOGOUT</a>
+        </button>
+
+    </div>
+
+    <!-- title -->
+    <h1 class="title">Welcome Admin</h1>
+
+    <!-- cards -->
+    <div class="grid">
+
+        <!-- users -->
+        <div class="box">
+            <div class="card">
+                <img src="stage pic/many people icon.png" alt="">
+            </div>
+            <a href="admin-users.html" class="link">VIEW REGISTER USERS →</a>
+        </div>
+
+        <!-- transport -->
+        <div class="box">
+            <div class="card">
+                <img src="stage pic/adimn bus.png" alt="">
+            </div>
+            <a href="admin-transport.html" class="link">UPLOAD TRANSPORT →</a>
+        </div>
+
+        <!-- concert -->
+        <div class="box">
+            <div class="card">
+                <img src="stage pic/concerts.png" alt="">
+            </div>
+            <a href="admin-concert.html" class="link">UPLOAD CONCERT →</a>
+        </div>
+
+        <!-- ticket -->
+        <div class="box">
+            <div class="card">
+                <img src="stage pic/ticket.png" alt="">
+            </div>
+            <a href="admin-tickets.html" class="link">VIEW BOUGHT TICKET →</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

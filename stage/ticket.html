@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Ticket</title>
+
+<style>
+:root {
+    --primary: #007bff;
+    --success: #28a745;
+    --bg: #f4f6f9;
+    --text: #222;
+    --muted: #777;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: var(--bg);
+}
+
+/* ===== HEADER ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 15px 5%;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.title h1 {
+    font-size: 16px;
+    color: var(--text);
+}
+
+.title p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.user-icon {
+    text-align: center;
+    font-size: 12px;
+}
+
+.user-icon span {
+    font-size: 18px;
+}
+
+/* ===== WRAPPER ===== */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 30px 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* ===== TICKET CARD ===== */
+.ticket-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* TOP SECTION */
+.ticket-top {
+    background: linear-gradient(to right, var(--primary), var(--success));
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.badge {
+    margin-top: 10px;
+    background: #e9f7ef;
+    color: var(--success);
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* BODY */
+.ticket-body {
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 14px;
+}
+
+.label {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.value {
+    font-weight: bold;
+}
+
+/* QR */
+.qr {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.qr img {
+    width: 140px;
+}
+
+/* FOOTER */
+.ticket-footer {
+    text-align: center;
+    padding: 12px;
+    background: #f0eeee;
+    font-size: 13px;
+    color: red;
+}
+
+/* ACTIONS */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.home-btn {
+    background: #eee;
+}
+
+.download-btn {
+    background: var(--primary);
+    color: white;
+}
+
+/* PRINT */
+@media print {
+    .actions { display: none; }
+    .header { display: none; }
+    body { background: white; }
+    .ticket-card { box-shadow: none; }
+}
+.ticket-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.ticket-logo {
+    width: 35px;
+    height: 35px;
+    background: white;
+    color: var(--primary);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-left">
+        <div class="logo">ST</div>
+        <div class="title">
+            <h1>Smart Ticket</h1>
+            <p>Online Booking System</p>
+        </div>
+    </div>
+
+    <div class="user-icon">
+        <span>👤</span>
+        <p>USER</p>
+    </div>
+</header>
+
+<!-- CONTENT -->
+<div class="wrapper">
+<div class="container">
+
+<div class="ticket-card">
+
+<!-- TOP -->
+<div class="ticket-top">
+
+    <div class="ticket-header-flex">
+        <div class="ticket-logo">ST</div>
+        <h2>Smart Ticket</h2>
+    </div>
+
+    <div id="typeBadge" class="badge">Loading...</div>
+
+</div>
+
+<!-- BODY -->
+<div class="ticket-body">
+
+    <div class="row">
+        <div class="label">Passenger</div>
+        <div class="value" id="name">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Title</div>
+        <div class="value" id="title">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Details</div>
+        <div class="value" id="details1">---</div>
+        <div class="value" id="details2">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Date / Time</div>
+        <div class="value" id="datetime">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Seat / Access</div>
+        <div class="value" id="seat">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Booking ID</div>
+        <div class="value" id="id">---</div>
+    </div>
+
+    <div class="row">
+        <div class="label">Total Paid</div>
+        <div class="value" id="price" style="color:var(--success);">---</div>
+    </div>
+
+    <div class="qr">
+        <img id="qrImg" alt="QR Code">
+        <p>Scan at entry</p>
+    </div>
+
+</div>
+
+<div class="ticket-footer">
+    Please arrive 30 minutes before departure/event time. <br>
+</div>
+
+</div>
+
+<!-- BUTTONS -->
+<div class="actions">
+    <button class="btn home-btn" onclick="goHome()">🏠 Home</button>
+    <button class="btn download-btn" onclick="downloadTicket()">📥 Download</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const booking = JSON.parse(localStorage.getItem("booking"));
+
+if (!booking) {
+    document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>No ticket found</h2>";
+} else {
+
+const type = booking.type || "event";
+
+document.getElementById("typeBadge").innerText =
+type === "event" ? "EVENT TICKET" : "TRANSPORT TICKET";
+
+document.getElementById("name").innerText =
+booking.user?.name || "Guest User";
+
+/* TYPE SWITCH */
+if (type === "event") {
+
+    document.getElementById("title").innerText =
+    booking.event?.title || "Event";
+
+    document.getElementById("details1").innerText =
+    "Ticket: " + (booking.ticket?.type || "Regular");
+
+    document.getElementById("details2").innerText =
+    "Venue: " + (booking.event?.location || "N/A");
+
+} else {
+
+    document.getElementById("title").innerText =
+    booking.event?.route || "Transport";
+
+    document.getElementById("details1").innerText =
+    "From: Nyabugogo";
+
+    document.getElementById("details2").innerText =
+    "Route: " + (booking.event?.route || "N/A");
+}
+
+document.getElementById("datetime").innerText =
+(booking.event?.date || "Today") + " | " + (booking.event?.time || "");
+
+document.getElementById("seat").innerText =
+booking.meta?.seat || "SEAT-01";
+
+document.getElementById("id").innerText =
+booking.meta?.bookingId || "ST" + Math.floor(Math.random()*100000);
+
+document.getElementById("price").innerText =
+(booking.ticket?.price || booking.event?.price || "0") + " RWF";
+
+/* QR */
+const qrData = encodeURIComponent(JSON.stringify(booking));
+
+document.getElementById("qrImg").src =
+"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrData;
+
+/* ACTIONS */
+function goHome(){
+    window.location.href = "home.html";
+}
+
+function downloadTicket(){
+    window.print();
+}
+}
+</script>
+
+</body>
+</html>

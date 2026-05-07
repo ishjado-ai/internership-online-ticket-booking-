@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Ticket</title>
+
+<style>
+:root{
+    --primary:#007bff;
+    --secondary:#00c6ff;
+    --dark:#1a1a1a;
+    --light:#f5f7fa;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:var(--light);
+    color:var(--dark);
+}
+
+/* HEADER */
+header{
+    position:sticky;
+    top:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 5%;
+    background:rgba(255,255,255,0.8);
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    z-index:1000;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-circle{
+    width:40px;
+    height:40px;
+    background:var(--primary);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:500;
+}
+
+.nav a:hover{
+    color:var(--primary);
+}
+
+.nav .btn{
+    background:var(--primary);
+    color:white;
+    padding:8px 16px;
+    border-radius:20px;
+}
+
+/* HERO SLIDER */
+.hero{
+    position:relative;
+    height:90vh;
+    overflow:hidden;
+}
+
+/* SLIDES */
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+/* OVERLAY */
+.hero::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+}
+
+/* TEXT */
+.hero-content{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:2.8rem;
+}
+
+.hero p{
+    font-size:1.2rem;
+}
+
+/* SECTION */
+.section{
+    padding:60px 5%;
+}
+
+.section h2{
+    margin-bottom:20px;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:300px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+    transform:translateY(50px);
+    opacity:0;
+    transition:0.5s;
+}
+
+.card.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:10px;
+    color:var(--primary);
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:white;
+    margin-top:40px;
+    color:#777;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .cards{
+        flex-direction:column;
+        align-items:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-area">
+        <div class="logo-circle">ST</div>
+        <div>
+            <div style="font-weight:bold;">Smart Ticket</div>
+            <div style="font-size:0.8rem;color:#777;">Online Booking</div>
+        </div>
+    </div>
+
+<div class="nav">
+    <a href="index.html">Login</a>
+    <a href="index.html" class="btn">Register</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="slide active" style="background-image:url('stage pic/conav\ pic\ 1.jpg');"></div>
+    <div class="slide" style="background-image:url('stage pic/slide_2.png');"></div>
+    <div class="slide" style="background-image:url('stage pic/slide_3.png');"></div>
+
+    <div class="hero-content">
+        <h1>WELCOME TO ONLINE SMART TICKET 🎟️</h1>
+        <p>Transport & events across Rwanda</p>
+    </div>
+
+</section>
+
+<!-- TRANSPORT -->
+<section class="section">
+<h2>Popular Transport</h2>
+
+<div class="cards">
+
+<div class="card reveal">
+<img src="stage pic/bus 5.jpg" alt=""
+>
+<div class="card-content">
+<h3>Kigali → Huye</h3>
+<p>Comfortable daily buses</p>
+<a href="index.html">Book Now</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/bus 4.jpg" alt="">
+<div class="card-content">
+<h3>Kigali → Gicumbi</h3>
+<p>Fast transport</p>
+<a href="index.html">Book Now</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/bus 9.jpg" alt="">
+<div class="card-content">
+<h3>Kigali → Gatsibo</h3>
+<p>Fast transport</p>
+<a href="index.html">Book Now</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/bus 7.jpg" alt="">
+<div class="card-content">
+<h3>Kigali → Musanze</h3>
+<p>Fast transport</p>
+<a href="index.html">Book Now</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- EVENTS -->
+<section class="section">
+<h2>Upcoming Events</h2>
+
+<div class="cards">
+
+<div class="card reveal">
+<img src="stage pic/chart.png" alt="Concert Night">
+<div class="card-content">
+<h3>Concert Night</h3>
+<p>Live experience</p>
+<a href="index.html">Get Ticket</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/event 9.jpg" alt="All Dj at one place">
+<div class="card-content">
+<h3>All Dj at one place</h3>
+<p>Stadium action</p>
+<a href="index.html">Get Ticket</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/comedy.webp" alt="Comedy night">
+<div class="card-content">
+<h3>Comedy night</h3>
+<p>Stadium action</p>
+<a href="index.html">Get Ticket</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/fashion.jpg" alt="Fashion show">
+<div class="card-content">
+<h3>Fashion show</h3>
+<p>Cinema Hall</p>
+<a href="index.html">Get Ticket</a>
+</div>
+</div>
+
+<div class="card reveal">
+<img src="stage pic/event 3.jpg" alt="Allstar concert">
+<div class="card-content">
+<h3>Allstar concert</h3>
+<p>BK Arena</p>
+<a href="index.html">Get Ticket</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 Smart Ticket</p>
+</footer>
+
+<script>
+// Redirect if logged in
+if(localStorage.getItem("user")){
+    window.location.href="home.html";
+}
+
+// SLIDER
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+function showSlide(){
+    slides.forEach(slide => slide.classList.remove("active"));
+    index++;
+    if(index >= slides.length) index = 0;
+    slides[index].classList.add("active");
+}
+setInterval(showSlide, 4000);
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', () => {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    reveals.forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+
+        if(boxTop < triggerBottom){
+            el.classList.add('show');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
